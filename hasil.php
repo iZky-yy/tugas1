@@ -38,17 +38,17 @@ if(!empty($_POST['bahan2'])){
 $diskon = 0;
 $ketDiskon = "Tidak ada diskon";
 
-if ($total >= 250000 && $total < 300000) {
+if ($total >= 100000 && $total < 300000) {
     $diskon = 0.05 * $total;
-    $ketDiskon = "Diskon 5% (Rp 250.000 ke atas)";
+    $ketDiskon = "Diskon 5% (Minimal belanja Rp 100.000)";
 }
-elseif ($total >= 300000 && $total < 400000) {
+elseif ($total >= 300000 && $total < 500000) {
     $diskon = 0.08 * $total;
-    $ketDiskon = "Diskon 8% (Rp 300.000 ke atas)";
+    $ketDiskon = "Diskon 8% (Minimal belanja Rp 300.000)";
 }
-elseif ($total >= 400000) {
+elseif ($total >= 500000) {
     $diskon = 0.10 * $total;
-    $ketDiskon = "Diskon 10% (Rp 400.000 ke atas)";
+    $ketDiskon = "Diskon 10% (Minimal belanja Rp 500.000)";
 
 }
 

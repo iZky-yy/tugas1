@@ -21,7 +21,9 @@ $harga = [
 
 <div class="info-diskon">
     <b>🎉 Promo Diskon</b><br>
-    💰 Diskon <b>10%</b> untuk pembelian minimal <b>Rp 500.000</b><br>
+    💰 Diskon <b>5%</b> untuk pembelian minimal<b>Rp 100.000</b><br>
+    💰 Diskon <b>8%</b> untuk pembelian minimal<b>Rp 300.000</b><br>
+    💰 Diskon <b>10%</b> untuk pembelian minimal<b>Rp 500.000</b><br>
     <small>*Diskon otomatis dihitung di halaman hasil</small>
 </div>
 
