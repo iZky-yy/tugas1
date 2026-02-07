@@ -51,81 +51,13 @@ $totalBayar = $total - $diskon;
 <head>
 <meta charset="UTF-8">
 <title>Hasil Pembelian</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
-
-<style>
-body{
-    font-family:'Quicksand', sans-serif;
-    margin:0;
-    min-height:100vh;
-    background:url("background.jpg") no-repeat center top;
-    background-size:cover;
-}
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.4);
-    z-index:-1;
-}
-.container{
-    max-width:620px;
-    margin:60px auto;
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(8px);
-    padding:30px;
-    border-radius:18px;
-}
-h2{
-    font-family:'Dancing Script', cursive;
-    font-size:32px;
-    text-align:center;
-    margin-bottom:25px;
-}
-.box{
-    background:rgba(255,255,255,.65);
-    padding:18px;
-    border-radius:14px;
-    margin-bottom:15px;
-}
-.row{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:8px;
-}
-.total{
-    font-size:22px;
-    font-weight:600;
-    text-align:center;
-    margin-top:20px;
-}
-.badge{
-    display:inline-block;
-    background:#667eea;
-    color:white;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:13px;
-    margin-top:10px;
-}
-.btn{
-    display:block;
-    text-align:center;
-    margin-top:25px;
-    text-decoration:none;
-    background:#667eea;
-    color:white;
-    padding:12px;
-    border-radius:12px;
-    font-weight:600;
-}
-</style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="container">
+<div class="container-hasil">
 
 <h2>🧾 Ringkasan Pembelian</h2>
 
