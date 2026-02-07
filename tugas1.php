@@ -1,79 +1,78 @@
-<?php
-$harga = [
-    "satin"   => ["S"=>100000, "M"=>125000, "L"=>140000, "XL"=>160000],
-    "wol"     => ["S"=>115000, "M"=>135000, "L"=>155000, "XL"=>180000],
-    "katun"   => ["S"=>35000,  "M"=>50000,  "L"=>70000,  "XL"=>85000],
-    "crincle" => ["S"=>60000,  "M"=>80000,  "L"=>105000, "XL"=>120000],
-];
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Toko Baju Modern</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<title>Tugas 1 - Pembelian Baju</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+    background:radial-gradient(circle at top,#1e293b,#020617);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+}
+.card{
+    width:420px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+h2{text-align:center;margin-bottom:25px}
+label{display:block;margin-top:14px}
+select,input{
+    width:100%;
+    margin-top:6px;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:#fff;
+}
+option{color:#000}
+button{
+    margin-top:22px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    font-weight:600;
+    cursor:pointer;
+}
+</style>
 </head>
-
 <body>
-<div class="container">
-    <h1>🛍️ Form Penjahitan Baju</h1>
-
-<div class="info-diskon">
-    <b>🎉 Promo Diskon</b><br>
-    💰 Diskon <b>5%</b> untuk pembelian minimal<b>Rp 100.000</b><br>
-    💰 Diskon <b>8%</b> untuk pembelian minimal<b>Rp 300.000</b><br>
-    💰 Diskon <b>10%</b> untuk pembelian minimal<b>Rp 500.000</b><br>
-    <small>*Diskon otomatis dihitung di halaman hasil</small>
-</div>
-
-<form action="hasil.php" method="post">
-
-<label>Nama Pembeli</label>
-<input type="text" name="nama" required>
 
 <div class="card">
-<h3>Baju 1</h3>
+<h2>👕 TUGAS 1 - PEMBELIAN BAJU</h2>
 
-<label>Bahan</label>
-<select name="bahan1">
-    <option value="satin">Satin</option>
-    <option value="wol">Wol</option>
-    <option value="katun">Katun</option>
-    <option value="crincle">Crincle</option>
+<form method="post" action="hasil.php">
+<label>Bahan Baju</label>
+<select name="bahan" required>
+<option value="">Pilih Bahan</option>
+<option value="satin">Satin</option>
+<option value="wol">Wol</option>
+<option value="katun">Katun</option>
+<option value="crincle">Crincle</option>
+<option value="polyester">Polyester</option>
 </select>
 
 <label>Ukuran</label>
-<select name="ukuran1">
-    <option>S</option><option>M</option><option>L</option><option>XL</option>
+<select name="ukuran" required>
+<option value="">Pilih Ukuran</option>
+<option>S</option><option>M</option><option>L</option><option>XL</option>
 </select>
 
-<label>Jumlah</label>
-<input type="number" name="jumlah1" value="1" min="1">
-</div>
+<label>Jumlah Beli</label>
+<input type="number" name="jumlah" min="1" required>
 
-<div class="card">
-<h3>Baju 2 (Opsional)</h3>
-
-<label>Bahan</label>
-<select name="bahan2">
-    <option value="">-- Tidak membeli --</option>
-    <option value="satin">Satin</option>
-    <option value="wol">Wol</option>
-    <option value="katun">Katun</option>
-    <option value="crincle">Crincle</option>
-</select>
-
-<label>Ukuran</label>
-<select name="ukuran2">
-    <option>S</option><option>M</option><option>L</option><option>XL</option>
-</select>
-
-<label>Jumlah</label>
-<input type="number" name="jumlah2" value="1" min="1">
-</div>
-
-<button type="submit">Hitung Total</button>
+<button type="submit">Proses</button>
 </form>
 </div>
 

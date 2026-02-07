@@ -1,58 +1,26 @@
 <?php
+date_default_timezone_set("Asia/Jakarta");
+
 $harga = [
-    "satin"   => ["S"=>100000, "M"=>125000, "L"=>140000, "XL"=>160000],
-    "wol"     => ["S"=>115000, "M"=>135000, "L"=>155000, "XL"=>180000],
-    "katun"   => ["S"=>35000,  "M"=>50000,  "L"=>70000,  "XL"=>85000],
-    "crincle" => ["S"=>60000,  "M"=>80000,  "L"=>105000, "XL"=>120000],
+"satin"=>["S"=>100000,"M"=>125000,"L"=>140000,"XL"=>160000],
+"wol"=>["S"=>115000,"M"=>135000,"L"=>155000,"XL"=>180000],
+"katun"=>["S"=>35000,"M"=>50000,"L"=>70000,"XL"=>85000],
+"crincle"=>["S"=>60000,"M"=>80000,"L"=>105000,"XL"=>120000],
+"polyester"=>["S"=>40000,"M"=>50000,"L"=>60000,"XL"=>70000]
 ];
 
-function rupiah($angka){
-    return "Rp " . number_format($angka,0,",",".");
-}
+$bahan=$_POST['bahan'];
+$ukuran=$_POST['ukuran'];
+$jumlah=$_POST['jumlah'];
 
-$nama = $_POST['nama'];
+$harga_satuan=$harga[$bahan][$ukuran];
+$total=$harga_satuan*$jumlah;
 
-$total = 0;
-$totalBarang = 0;
+$diskon = ($jumlah>=20)?0.2:(($jumlah>=10)?0.1:(($jumlah>=5)?0.05:0));
+$potongan=$total*$diskon;
+$bayar=$total-$potongan;
 
-/* BAJU 1 */
-$harga1   = $harga[$_POST['bahan1']][$_POST['ukuran1']];
-$jumlah1  = $_POST['jumlah1'];
-$subtotal1 = $harga1 * $jumlah1;
-
-$total += $subtotal1;
-$totalBarang += $jumlah1;
-
-/* BAJU 2 */
-$subtotal2 = 0;
-if(!empty($_POST['bahan2'])){
-    $harga2   = $harga[$_POST['bahan2']][$_POST['ukuran2']];
-    $jumlah2  = $_POST['jumlah2'];
-    $subtotal2 = $harga2 * $jumlah2;
-
-    $total += $subtotal2;
-    $totalBarang += $jumlah2;
-}
-
-/* DISKON */
-$diskon = 0;
-$ketDiskon = "Tidak ada diskon";
-
-if ($total >= 100000 && $total < 300000) {
-    $diskon = 0.05 * $total;
-    $ketDiskon = "Diskon 5% (Minimal belanja Rp 100.000)";
-}
-elseif ($total >= 300000 && $total < 500000) {
-    $diskon = 0.08 * $total;
-    $ketDiskon = "Diskon 8% (Minimal belanja Rp 300.000)";
-}
-elseif ($total >= 500000) {
-    $diskon = 0.10 * $total;
-    $ketDiskon = "Diskon 10% (Minimal belanja Rp 500.000)";
-
-}
-
-$totalBayar = $total - $diskon;
+$id="TRX".date("YmdHis");
 ?>
 
 <!DOCTYPE html>
@@ -60,74 +28,81 @@ $totalBayar = $total - $diskon;
 <head>
 <meta charset="UTF-8">
 <title>Hasil Pembelian</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
-</head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+    background:#020617;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+}
+.card{
+    width:420px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+h2{text-align:center;margin-bottom:10px}
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin:8px 0;
+    font-size:14px;
+}
+.total{
+    font-size:18px;
+    font-weight:700;
+    color:#22c55e;
+}
+.btn{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+}
+.print{background:#38bdf8}
+.back{background:#22c55e}
+@media print{
+    body{background:#fff;color:#000}
+    .btn{display:none}
+    .card{box-shadow:none}
+}
+</style>
+</head>
 <body>
 
-<div class="container-hasil">
+<div class="card">
+<h2>🧾 HASIL PEMBELIAN</h2>
 
-<h2>🧾 Ringkasan Pembelian</h2>
+<div class="row"><span>ID Transaksi</span><span><?=$id?></span></div>
+<div class="row"><span>Tanggal</span><span><?=date("d M Y H:i")?></span></div>
+<hr>
 
-<div class="box">
-    <div class="row">
-        <b>Nama Pembeli</b>
-        <span><?= $nama ?></span>
-    </div>
+<div class="row"><span>Bahan</span><span><?=ucfirst($bahan)?></span></div>
+<div class="row"><span>Ukuran</span><span><?=$ukuran?></span></div>
+<div class="row"><span>Harga Satuan</span><span>Rp <?=number_format($harga_satuan,0,',','.')?></span></div>
+<div class="row"><span>Jumlah</span><span><?=$jumlah?></span></div>
+<div class="row"><span>Total Harga</span><span>Rp <?=number_format($total,0,',','.')?></span></div>
+<div class="row"><span>Diskon</span><span><?=$diskon*100?>%</span></div>
+
+<hr>
+<div class="row total"><span>Total Bayar</span><span>Rp <?=number_format($bayar,0,',','.')?></span></div>
+
+<button class="btn print" onclick="window.print()">🖨 Cetak Struk</button>
+
+<form action="tugas1.php">
+<button class="btn back">⬅ Kembali ke Pembelian</button>
+</form>
 </div>
 
-<div class="box">
-    <b>Detail Perhitungan</b><br><br>
-
-    <div class="row">
-        <span>Baju 1</span>
-        <span><?= rupiah($harga1) ?> × <?= $jumlah1 ?></span>
-    </div>
-    <div class="row">
-        <b>Subtotal Baju 1</b>
-        <b><?= rupiah($subtotal1) ?></b>
-    </div>
-
-    <?php if($subtotal2 > 0){ ?>
-    <hr>
-    <div class="row">
-        <span>Baju 2</span>
-        <span><?= rupiah($harga2) ?> × <?= $jumlah2 ?></span>
-    </div>
-    <div class="row">
-        <b>Subtotal Baju 2</b>
-        <b><?= rupiah($subtotal2) ?></b>
-    </div>
-    <?php } ?>
-
-    <hr>
-
-    <div class="row">
-        <b>Total Barang</b>
-        <b><?= $totalBarang ?> pcs</b>
-    </div>
-
-    <div class="row">
-        <b>Total Sebelum Diskon</b>
-        <b><?= rupiah($total) ?></b>
-    </div>
-
-    <div class="row">
-        <span>Diskon</span>
-        <span><?= rupiah($diskon) ?></span>
-    </div>
-
-    <span class="badge"><?= $ketDiskon ?></span>
-</div>
-
-<div class="total">
-    Total Bayar<br>
-    <?= rupiah($totalBayar) ?>
-</div>
-
-<a href="tugas1.php" class="btn">⬅️ Kembali ke Form</a>
-
-</div>
 </body>
 </html>
